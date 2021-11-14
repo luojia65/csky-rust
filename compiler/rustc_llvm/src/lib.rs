@@ -95,6 +95,14 @@ pub fn initialize_available_targets() {
         LLVMInitializeAVRAsmParser
     );
     init_target!(
+        llvm_component = "csky",
+        LLVMInitializeCSKYTargetInfo,
+        LLVMInitializeCSKYTarget,
+        LLVMInitializeCSKYTargetMC,
+        LLVMInitializeCSKYAsmPrinter,
+        LLVMInitializeCSKYAsmParser
+    );
+    init_target!(
         llvm_component = "m68k",
         LLVMInitializeM68kTargetInfo,
         LLVMInitializeM68kTarget,

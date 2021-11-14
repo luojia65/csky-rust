@@ -76,6 +76,7 @@ fn main() {
         "aarch64",
         "amdgpu",
         "avr",
+        "csky",
         "m68k",
         "mips",
         "powerpc",
