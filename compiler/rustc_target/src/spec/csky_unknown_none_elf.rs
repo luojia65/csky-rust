@@ -4,7 +4,7 @@ use crate::spec::{Target, TargetOptions};
 pub fn target() -> Target {
     Target {
         data_layout: "e-m:e-p:32:32-i64:64-n32-S128".to_string(),
-        llvm_target: "csky".to_string(),
+        llvm_target: "csky-unknown-unknown".to_string(),
         pointer_width: 32,
         arch: "csky".to_string(),
 
@@ -14,7 +14,7 @@ pub fn target() -> Target {
             cpu: "generic".to_string(),
             max_atomic_width: Some(0),
             atomic_cas: false,
-            features: "e2".to_string(), // todo: features
+            features: "+e1,+e2,+2e3,+3e7,+7e10,+10e60,+elrw,+mp1e2,+doloop".to_string(),
             executables: true,
             panic_strategy: PanicStrategy::Abort,
             relocation_model: RelocModel::Static,
