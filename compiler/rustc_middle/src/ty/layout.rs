@@ -736,11 +736,14 @@ impl<'tcx> LayoutCx<'tcx, TyCtxt<'tcx>> {
                     return Err(LayoutError::Unknown(ty));
                 }
 
-                // Supported SIMD vectors are homogeneous ADTs with at least one field:
+                // Supported SIMD vectors are either homogeneous ADTs with at least one field,
+                // or one unsized slice of one ADT:
                 //
                 // * #[repr(simd)] struct S(T, T, T, T);
                 // * #[repr(simd)] struct S { x: T, y: T, z: T, w: T }
                 // * #[repr(simd)] struct S([T; 4])
+                // * #[repr(simd)] struct S([T])
+                // * #[repr(simd)] struct S { x: [T] }
                 //
                 // where T is a primitive scalar (integer/float/pointer).
 

@@ -1222,12 +1222,12 @@ pub fn check_simd(tcx: TyCtxt<'_>, sp: Span, def_id: LocalDefId) {
             ty::Param(_) => (), // pass struct<T>(T, T, T, T) through, let monomorphization catch errors
             ty::Int(_) | ty::Uint(_) | ty::Float(_) | ty::RawPtr(_) => (), // struct(u8, u8, u8, u8) is ok
             ty::Array(t, _) if matches!(t.kind(), ty::Param(_)) => (), // pass struct<T>([T; N]) through, let monomorphization catch errors
-            ty::Array(t, _clen)
+            ty::Array(t, _) | ty::Slice(t)
                 if matches!(
                     t.kind(),
                     ty::Int(_) | ty::Uint(_) | ty::Float(_) | ty::RawPtr(_)
                 ) =>
-            { /* struct([f32; 4]) is ok */ }
+            { /* struct([f32; 4]) and struct ([f32]) etc. are ok */ }
             _ => {
                 struct_span_err!(
                     tcx.sess,
